@@ -7,16 +7,19 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Progress } from "@/components/ui/progress";
+import { Toaster } from "@/components/ui/toaster";
+import { useToast } from "@/components/ui/use-toast";
+import { getCourse } from "@/lib/getCourse";
 import { getLessonByModuleFormatted } from "@/lib/getLessons";
 import { cn } from "@/lib/utils";
-import { LessonDto } from "@/types/dto";
+import { CourseDto, CourseWithLessonDto, LessonDto } from "@/types/dto";
 import { PlayCircleIcon, Trophy } from "lucide-react";
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 
 interface layoutProps {
   params: {
-    courseId: number;
+    courseId: string;
   };
 
   children: React.ReactNode;
@@ -24,23 +27,35 @@ interface layoutProps {
 }
 
 export const page: FC<layoutProps> = ({ children, params }) => {
-  // const [hasMounted, setHasMounted] = useState(false);
   const [lessons, setLessons] = useState<LessonDto[][]>([]);
+  const [course, setCourse] = useState<CourseWithLessonDto>();
 
   useEffect(() => {
     const fetLessons = async () => {
       const _lessons = await getLessonByModuleFormatted(params.courseId);
       setLessons(_lessons);
     };
-    // setHasMounted(true);
+
     fetLessons();
   }, [params.courseId]);
 
+  useEffect(() => {
+    const fetchCourse = async () => {
+      const _course = await getCourse(params.courseId.toString());
+      console.log(_course);
+      setCourse(_course);
+    };
+
+    fetchCourse();
+  }, [params.courseId]);
+
+  // const [title, setTitle] = useState<string>(lessons[0][0].title);
   return (
-    <div className="flex gap-4 h-full bg-background">
-      <div className="bg-[#fff] w-[580px] max-h-screen overflow-scroll flex gap-2 flex-col  justify-start text-[#222] border-r-secondary-button border-r-[1px]">
+    <div className="flex gap-4 h-full bg-secondary-background shadow-sm">
+      <Toaster />
+      <div className="bg-[#fff] min-w-[380px] max-h-screen overflow-scroll flex gap-2 flex-col  justify-start text-[#222] border-r-secondary-button border-r-[1px]">
         <div className="p-4 border-secondary-button border-b ">
-          {/* <h1 className="font-medium text-xl">{title}</h1> */}
+          <h1 className="font-medium text-xl">Course Progress</h1>
           <div className="flex items-center">
             <Progress value={20} className="bg-primary-button h-1" />
             <Trophy
@@ -89,15 +104,16 @@ export const page: FC<layoutProps> = ({ children, params }) => {
                         >
                           <Link
                             href={`/dashboard/learn/course/${params.courseId}/video/${l.id}`}
+                            // onClick={() =>
+                            //   setTitle(lessons[params.courseId][i].title)
+                            // }
                             className={cn(
                               "text-accent flex items-center justify-between hover:cursor-pointer",
                               { "text-[#fff]": l.isLessonCompleted }
                             )}
                           >
                             <p>{l.title}</p>
-                            <PlayCircleIcon
-                              color={l.isLessonCompleted ? "#fff" : "#768f93"}
-                            />
+                            <PlayCircleIcon color={"#768f93"} />
                           </Link>
                         </AccordionContent>
                       );

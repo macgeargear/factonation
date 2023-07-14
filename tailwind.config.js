@@ -13,7 +13,16 @@ module.exports = {
         "2xl": "1400px",
       },
     },
-
+    colors: {
+      complete: "#4ade80",
+      text: "#222",
+      "primary-button": "#0ac5a8",
+      background: "#ffffff",
+      darkBackground: "#2C3730",
+      "secondary-button": "#efebeb",
+      accent: "#768f93",
+      "secondary-background": "#f8f8f8",
+    },
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -21,7 +30,7 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       fontFamily: {
-        'Noto': ['Noto', 'Sans', 'Thai', "sans-serif"]
+        Noto: ["Noto", "Sans", "Thai", "sans-serif"],
       },
       colors: {
         text: "#111111",

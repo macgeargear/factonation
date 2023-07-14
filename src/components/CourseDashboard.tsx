@@ -26,18 +26,6 @@ const CourseDashboard: FC<CourseDashboardProps> = ({
 }) => {
   return (
     <>
-      {/* <Table>
-        <TableCaption>Almost done, fighting!🔥</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Course Title</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Last Access</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
-          </TableRow>
-          <TableBody></TableBody>
-        </TableHeader>
-      </Table> */}
       <div className="flex items-center justify-between rounded-lg px-10 py-8 bg-secondary-button">
         <h2 className="text-[#222] text-lg font-semibold">{courseName}</h2>
         <div className="w-full max-w-xl">

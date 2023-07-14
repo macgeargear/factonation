@@ -12,7 +12,7 @@ export async function getAllLessonFormatted() {
   return lessonData.data;
 }
 
-export async function getLessonByModuleFormatted(module: number) {
+export async function getLessonByModuleFormatted(module: string) {
   const res = await fetch(
     `http://localhost:8000/lesson/moduleAndweek/${module}`
   );
