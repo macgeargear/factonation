@@ -1,16 +1,14 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
 import { cn } from "../lib/utils";
+
+import { IBM_Plex_Sans_Thai } from "next/font/google";
+import Provider from "./provider";
 import Navbar from "@/components/Navbar";
-import { Toaster } from "@/components/ui/toaster";
-// import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-
-import {IBM_Plex_Sans_Thai} from 'next/font/google'
-
-const imb_plex_sans_thai = IBM_Plex_Sans_Thai({subsets: ['thai'], weight: ['100','200','400', '600']})
-
-// const queryClient = new QueryClient();
+const imb_plex_sans_thai = IBM_Plex_Sans_Thai({
+  subsets: ["thai"],
+  weight: ["100", "200", "400", "600"],
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -23,14 +21,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-
     <html lang="en" className={cn(imb_plex_sans_thai.className)}>
-
-      <body className={cn("min-h-screen mx-auto")}>
+      <body className={cn("min-h-screen mx-auto", "scroll-smooth")}>
         <Navbar />
-        {children}
+        <Provider>{children}</Provider>
       </body>
-      {/* </QueryClientProvider> */}
     </html>
   );
 }

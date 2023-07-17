@@ -3,7 +3,7 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Checkbox as RadixCheckBox } from "@radix-ui/react-checkbox";
 import { useToast } from "@/components/ui/use-toast";
-import { getLessonByModuleFormatted } from "@/lib/getLessons";
+import { getLessonByCourseIdFormetted } from "@/lib/getLessons";
 import { LessonDto } from "@/types/dto";
 import { FC, useEffect, useState } from "react";
 import ReactPlayer from "react-player";
@@ -32,7 +32,7 @@ const page: FC<pageProps> = ({ params: { videoId, courseId } }) => {
   useEffect(() => {
     const fetLessons = async () => {
       setLoading(true);
-      const _lessons = await getLessonByModuleFormatted(courseId);
+      const _lessons = await getLessonByCourseIdFormetted(courseId);
       setLessons(_lessons);
       setLoading(false);
     };

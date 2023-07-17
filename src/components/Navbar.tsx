@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import ScrollLink from "./ScrollLink";
 
 const Navbar: FC = () => {
   return (
@@ -17,11 +18,12 @@ const Navbar: FC = () => {
           </Link>
 
           <div className="hidden md:flex md:items-center md:justify-start md:gap-8">
-            <Link href="/course">คอร์สเรียน</Link>
-            <Link href="/pricing">ราคาคอร์ส</Link>
+            <ScrollLink href="/course">คอร์สเรียน</ScrollLink>
+            <ScrollLink href="#price-section" className="scroll-smooth">
+              ราคาคอร์ส
+            </ScrollLink>
             <Link href="/store">บทความ</Link>
-            <Link href="/store">คำถามที่พบบ่อย</Link>
-
+            <ScrollLink href="#question-section">คำถามที่พบบ่อย</ScrollLink>
           </div>
         </div>
         <div className="flex items-center gap-3">
@@ -29,7 +31,7 @@ const Navbar: FC = () => {
             className={cn(buttonVariants({ variant: "ghost" }))}
             href="/sign-in"
           >
-            เข้าสู้ระบบ
+            เข้าสู่ระบบ
           </Link>
           <Link
             className={cn(
