@@ -2,7 +2,7 @@
 "use client";
 import AddCourseForm from "@/components/AddCourseForm";
 import AddLessonForm from "@/components/AddLessonForm";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { getCourses } from "@/lib/getCourse";
 import { CourseDto, LessonDto } from "@/types/dto";
 import Link from "next/link";
@@ -119,7 +119,15 @@ const page: FC<pageProps> = () => {
                     </Link>
                   </td>
                   <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                    <a href="#" className="text-red-600 hover:text-red-900">
+                    <a
+                      href="#"
+                      className="text-red-600 hover:text-red-900"
+                      onClick={async () => {
+                        await fetch(`http://localhost/course/${course.id}`, {
+                          method: "DELETE",
+                        });
+                      }}
+                    >
                       Delete
                       <span className="sr-only">, {course.courseName}</span>
                     </a>

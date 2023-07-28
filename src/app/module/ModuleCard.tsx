@@ -1,6 +1,6 @@
 import Image, { StaticImageData } from "next/image";
 import Industry from "../../../public/smart_industry.jpg";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import module1 from "../../../public/scada-bootcamp-module-1-cover.jpg";
 import module2 from "../../../public/scada-bootcamp-module-2-cover.jpg";

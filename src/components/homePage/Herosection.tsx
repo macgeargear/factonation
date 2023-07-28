@@ -5,7 +5,7 @@ import heroImage from "../../../public/IMG_1737.webp";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { buttonVariants } from "../ui/Button";
+import { buttonVariants } from "../ui/button";
 import { useAuthContext } from "@/contexts/authContext";
 import { FC } from "react";
 
@@ -54,29 +54,34 @@ const Herosection: FC<ILogin> = () => {
           </div>
 
           <div className="flex xl:gap-8 text-2xl justify-center md:gap-5 gap-2">
-            {isLoggedIn ?(
-            <Link
-              href="#price-section"
-              className={cn(
-                buttonVariants({ size: "xl" },),
-                "lg:py-8 px-5 bg-black text-white md:text-xl text-base lg:w-44 "
-              )}
-            >
-              เริ่มเรียนทันที
-            </Link>):(<Link
-              href="/login"
-              className={cn(
-                buttonVariants({ size: "xl" }),
-                "lg:px-8 px-5 bg-black text-white lg:text-xl text-base lg:w-44"
-              )}
-            >
-              เริ่มเรียนทันที
-            </Link>)}
+            {isLoggedIn ? (
+              <Link
+                href="#price-section"
+                className={cn(
+                  buttonVariants({ size: "xl" }),
+                  "lg:py-8 px-5 bg-black text-white md:text-xl text-base lg:w-44 "
+                )}
+              >
+                เริ่มเรียนทันที
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className={cn(
+                  buttonVariants({ size: "xl" }),
+                  "lg:px-8 px-5 bg-black text-white lg:text-xl text-base lg:w-44"
+                )}
+              >
+                เริ่มเรียนทันที
+              </Link>
+            )}
 
             <Link
               href="/module"
               className={cn(
-                buttonVariants({ size: "xl", variant: "outline" })," lg:text-xl text-base px-5 py-3 lg:w-44")}
+                buttonVariants({ size: "xl", variant: "outline" }),
+                " lg:text-xl text-base px-5 py-3 lg:w-44"
+              )}
             >
               แนะนำคอร์ส
             </Link>

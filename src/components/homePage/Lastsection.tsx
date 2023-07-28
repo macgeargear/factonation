@@ -1,6 +1,5 @@
-
 "use client";
-import { Button, buttonVariants } from "@/components/ui/Button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Facebook } from "lucide-react";
 import { Youtube } from "lucide-react";
 import Image from "next/image";
@@ -12,10 +11,10 @@ import { FC } from "react";
 import { cn } from "@/lib/utils";
 
 interface ILogin {
-  isLoggedIn:boolean;
+  isLoggedIn: boolean;
 }
-const  Lastsection: FC<ILogin> = () => {
-  const {isLoggedIn} = useAuthContext();
+const Lastsection: FC<ILogin> = () => {
+  const { isLoggedIn } = useAuthContext();
   return (
     <div id="last-section" className="flex justify-center h-auto my-10 ">
       <div className="flex flex-col items-center gap-10 h-11/12 ">
@@ -37,19 +36,11 @@ const  Lastsection: FC<ILogin> = () => {
         >
           <div className="flex flex-col lg:text-4xl lg:font-normal lg:gap-2 font-light text-sm items-cente gap-1">
             <div className="flex flex-col text-center font-semibold  flex-wrap lg:gap-3 gap-1 ">
-              <p >
-                เพิ่มทักษะการทำงาน
-              </p>
+              <p>เพิ่มทักษะการทำงาน</p>
               <div className="flex lg:gap-2 gap-1 justify-center ">
-                <p >
-                  ให้พร้อมสำหรับ{" "}
-                </p>
-                <p className="  text-primary-button">
-                  Factory 4.0{" "}
-                </p>
-                <p >
-                  ได้แล้ววันนี้
-                </p>
+                <p>ให้พร้อมสำหรับ </p>
+                <p className="  text-primary-button">Factory 4.0 </p>
+                <p>ได้แล้ววันนี้</p>
               </div>
             </div>
 
@@ -57,33 +48,48 @@ const  Lastsection: FC<ILogin> = () => {
               เพียงสัปดาห์ละไม่เกิน 30 นาทีก็สามารถสร้าง Future Skill ไปกับเรา
             </p>
           </div>
-          {isLoggedIn ? 
-          (<Link href='#price-section' className={cn(buttonVariants({size: 'sm'}),"lg:px-8 px-4 bg-black text-white  lg:text-sm text-xs")}>
-            เริ่มเรียนทันที
-          </Link>):(<Link href='/login' className={cn(buttonVariants({size: 'sm'}),"lg:px-8 px-4 bg-black text-white lg:text-sm text-xs")}>
-          เริ่มเรียนทันที
-          </Link>)}
+          {isLoggedIn ? (
+            <Link
+              href="#price-section"
+              className={cn(
+                buttonVariants({ size: "sm" }),
+                "lg:px-8 px-4 bg-black text-white  lg:text-sm text-xs"
+              )}
+            >
+              เริ่มเรียนทันที
+            </Link>
+          ) : (
+            <Link
+              href="/login"
+              className={cn(
+                buttonVariants({ size: "sm" }),
+                "lg:px-8 px-4 bg-black text-white lg:text-sm text-xs"
+              )}
+            >
+              เริ่มเรียนทันที
+            </Link>
+          )}
         </motion.div>
 
         <div className="flex gap-3 items-center">
-        <Link href="https://web.facebook.com/officialfactonation">
-          <Facebook />
-        </Link>
-        <Link href="https://www.youtube.com/@FactonationTH/featured">
-          <Youtube />
-        </Link>
-        <Link href="https://page.line.me/559odtho?openQrModal=true">
-          <Image
-            src={lineIcon}
-            alt="hero image"
-            style={{ height: 22, width: 22 }}
-            className="flex items-center rounded-xl"
-          />
+          <Link href="https://web.facebook.com/officialfactonation">
+            <Facebook />
+          </Link>
+          <Link href="https://www.youtube.com/@FactonationTH/featured">
+            <Youtube />
+          </Link>
+          <Link href="https://page.line.me/559odtho?openQrModal=true">
+            <Image
+              src={lineIcon}
+              alt="hero image"
+              style={{ height: 22, width: 22 }}
+              className="flex items-center rounded-xl"
+            />
           </Link>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Lastsection;

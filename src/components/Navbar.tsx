@@ -2,7 +2,6 @@
 
 import { FC, useState } from "react";
 
-import { Button, buttonVariants } from "./ui/Button";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -24,6 +23,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { buttonVariants } from "./ui/button";
 
 const Navbar: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -60,13 +60,20 @@ const Navbar: FC = () => {
                     <AvatarFallback>{username![0]}</AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-white" align="end">
+                <DropdownMenuContent className="bg-white p-4" align="end">
                   {/* Name & Email */}
-                  <div className="flex items-center justify-start gap-2 p-2">
-                    <div className="flex flex-col space-y-1 leading-none">
-                      {username && (
-                        <p className="font-xl font-semibold">{username}</p>
-                      )}
+                  <div className="items-center flex">
+                    <Avatar className=" bg-primary-button">
+                      <AvatarImage></AvatarImage>
+                      <AvatarFallback>{username![0]}</AvatarFallback>
+                    </Avatar>
+                    <div className="flex items-center justify-start gap-2 p-2">
+                      <div className="flex flex-col space-y-1 leading-none">
+                        {username && (
+                          <p className="font-xl font-semibold">{username}</p>
+                        )}
+                        <p className="font-lg">{username}</p>
+                      </div>
                     </div>
                   </div>
                   <DropdownMenuSeparator className="bg-slate-200 px-4" />

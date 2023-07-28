@@ -3,7 +3,7 @@ import CourseStatus from "@/components/CourseStatus";
 import Navbar from "@/components/Navbar";
 import UserSummary from "@/components/UserSummary";
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Button, buttonVariants } from "@/components/ui/Button";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -19,7 +19,7 @@ import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { useAuthContext } from "@/contexts/authContext";
 import { useCourseStatus } from "@/hooks/useCourseStatus";
-import { useCourses } from "@/hooks/useCourses";
+import { useCourses, useUsersCourses } from "@/hooks/useCourses";
 import { getCourseStatus, getCourses } from "@/lib/getCourse";
 import { cn } from "@/lib/utils";
 import { CourseDto } from "@/types/dto";
@@ -33,28 +33,14 @@ interface pageProps {}
 const courseFetch = getCourses();
 
 const page: FC<pageProps> = () => {
-  // const { id, name } = useAuthContext();
-  // // const [courses, setCourses] = useState<CourseDto[]>();
-  // console.log({ id, name });
-  const { courses, isLoading, isError } = useCourses();
+  const { courses, isLoading, isError } = useUsersCourses();
 
-  console.log(courses);
   if (isLoading) return <div>Loading....</div>;
   if (isError) return <div>Error!!!!!!</div>;
   const id = localStorage.getItem("id");
-  console.log(id);
-  // const courses = await getCourses();
-  // useEffect(() => {
-  //   const fetchCourse = async () => {
-  //     const res = await getCourses();
-  //     console.log(res);
-  //     setCourses(res);
-  //   };
-  //   fetchCourse();
-  // }, []);
   return (
     <main className=" mt-12">
-      <div className="max-w-8xl mx-auto bg-background p-6 h-fit min-h-screen my-12 flex">
+      <div className="max-w-8xl  bg-background mx-auto p-6 h-fit min-h-screen my-12 flex justify-between">
         <div>
           <h1 className="text-4xl font-semibold text-primary-button my-2 mx-8">
             My Dashboard

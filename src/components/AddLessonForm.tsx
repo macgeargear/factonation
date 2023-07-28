@@ -2,7 +2,7 @@
 import { LessonDto } from "@/types/dto";
 import { Dispatch, FC, FormEvent, SetStateAction, useState } from "react";
 import { Label } from "./ui/label";
-import { Button } from "./ui/Button";
+import { Button } from "./ui/button";
 import {
   Dialog,
   DialogContent,
