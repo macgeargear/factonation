@@ -73,7 +73,9 @@ export default function AddCourseForm() {
         <form onSubmit={submit} className="flex flex-col w-full">
           <Label htmlFor="file">Course Image</Label>
           <input
-            onChange={(e) => setFile(e.target.files[0])}
+            onChange={(e) => {
+              if (e.target.files) setFile(e.target.files[0]);
+            }}
             id="file"
             type="file"
             accept="image/*"

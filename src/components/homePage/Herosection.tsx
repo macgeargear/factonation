@@ -6,16 +6,16 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { buttonVariants } from "../ui/button";
-import { useAuthContext } from "@/contexts/authContext";
 import { FC } from "react";
+import { useAuthContext } from "@/contexts/authContext";
 
 interface ILogin {
   isLoggedIn: boolean;
 }
 
-const Herosection: FC<ILogin> = () => {
+const Herosection: FC<ILogin> = async () => {
+  // const isLoggedIn = false;
   const { isLoggedIn } = useAuthContext();
-
   return (
     // <div className="min-h-screen">
     <div

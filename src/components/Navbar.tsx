@@ -23,12 +23,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { buttonVariants } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 
 const Navbar: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const { isLoggedIn, username } = useAuthContext();
+  const { isLoggedIn, name, email } = useAuthContext();
   return (
     <div className="sticky top-0 z-[10]">
       <div className="sticky top-0 inset-x-0 h-fit z-[10] py-4 bg-[#0B0E0C] text-background backdrop-blur-lg  ">
@@ -57,7 +57,7 @@ const Navbar: FC = () => {
                 <DropdownMenuTrigger>
                   <Avatar className=" bg-primary-button">
                     <AvatarImage></AvatarImage>
-                    <AvatarFallback>{username![0]}</AvatarFallback>
+                    <AvatarFallback>{email![0]}</AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="bg-white p-4" align="end">
@@ -65,14 +65,14 @@ const Navbar: FC = () => {
                   <div className="items-center flex">
                     <Avatar className=" bg-primary-button">
                       <AvatarImage></AvatarImage>
-                      <AvatarFallback>{username![0]}</AvatarFallback>
+                      <AvatarFallback>{name![0]}</AvatarFallback>
                     </Avatar>
                     <div className="flex items-center justify-start gap-2 p-2">
                       <div className="flex flex-col space-y-1 leading-none">
-                        {username && (
-                          <p className="font-xl font-semibold">{username}</p>
+                        {isLoggedIn && (
+                          <p className="font-xl font-semibold">{email}</p>
                         )}
-                        <p className="font-lg">{username}</p>
+                        <p className="font-lg">{name}</p>
                       </div>
                     </div>
                   </div>
@@ -83,7 +83,7 @@ const Navbar: FC = () => {
                   <DropdownMenuSeparator className="bg-slate-200 px-4" />
 
                   <DropdownMenuItem className="cursor-pointer">
-                    Sign out
+                    <Button onClick={() => {}}>Sign out</Button>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

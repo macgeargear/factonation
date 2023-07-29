@@ -15,7 +15,7 @@ import axios from "axios";
 interface AddLessonFormProps {
   lessons: LessonDto[];
   courseId: string;
-  setLessons: Dispatch<SetStateAction<LessonDto>>;
+  setLessons: Dispatch<SetStateAction<LessonDto[]>>;
 }
 
 /*

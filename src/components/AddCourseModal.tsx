@@ -6,6 +6,7 @@ import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useCourses } from "@/hooks/useCourses";
 import { CourseDto, EnrollmentDto } from "@/types/dto";
+import Cookies from "js-cookie";
 
 export default function AddCourseModal({
   open,
@@ -34,7 +35,7 @@ export default function AddCourseModal({
   //enrolled courses
 
   const createEnrollment = async (selectedCourses: string[]) => {
-    //const accessToken = localStorage.getItem('token')
+    const accessToken = Cookies.get("token");
 
     try {
       for (let i = 0; i < selectedCourses.length; i++) {
@@ -43,7 +44,7 @@ export default function AddCourseModal({
         await fetch(`http://localhost:8000/user/student/enroll`, {
           method: "POST",
           headers: {
-            // Authorization: `bearer ${accessToken}`,
+            Authorization: `bearer ${accessToken}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({

@@ -1,7 +1,7 @@
 "use client";
 // import { Metadata } from "next";
 import Image from "next/image";
-import loginImage from '../../../../public/IMG_1798.webp'
+import loginImage from "../../../../public/IMG_1798.webp";
 // import Link from "next/link";
 // import { Command } from "lucide-react";
 
@@ -15,23 +15,19 @@ import React from "react";
 import { FC } from "react";
 import { useState } from "react";
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-const Page: FC<UserAuthFormProps> =  () => {
+const page: FC = () => {
   return (
     <div className="flex min-h-screen flex-1">
-     
-        <UserAuthForm page={UserAuthFormPage.LogIn}  />
-        <div className="relative hidden w-0 flex-1 lg:block">
-          <Image
-            className="absolute inset-0 h-full w-full object-cover"
-            src={loginImage}
-            alt=""
-          />
-        </div>
-      
+      <UserAuthForm page={UserAuthFormPage.LogIn} />
+      <div className="relative hidden w-0 flex-1 lg:block">
+        <Image
+          className="absolute inset-0 h-full w-full object-cover"
+          src={loginImage}
+          alt=""
+        />
+      </div>
     </div>
   );
-}
+};
 
-export default Page;
+export default page;

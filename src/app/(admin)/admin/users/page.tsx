@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { UserDto } from "@/types/dto";
 import useUserList from "@/hooks/useUsers";
 import { FC } from "react";
+import Cookies from "js-cookie";
 
 interface pageProps {}
 
@@ -24,14 +25,14 @@ const Page = () => {
   const router = useRouter();
 
   const HandleDelete = async (id: string) => {
-    //const accessToken = localStorage.getItem('token')
+    const accessToken = Cookies.get("token");
 
     try {
       const response = await fetch(`http://localhost:8000/user/student/${id}`, {
         method: "DELETE",
-        // headers: {
-        //   Authorization: `bearer ${accessToken}`,
-        // },
+        headers: {
+          Authorization: `bearer ${accessToken}`,
+        },
       });
 
       if (response.ok) {

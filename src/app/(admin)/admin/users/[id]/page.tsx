@@ -22,6 +22,7 @@ import {
 import { useRef } from "react";
 import AddCourseModal from "@/components/AddCourseModal";
 import { useCourses } from "@/hooks/useCourses";
+import Cookies from "js-cookie";
 
 interface pageProps {
   params: {
@@ -53,13 +54,13 @@ const Page: FC<pageProps> = () => {
   }, [user]);
 
   const handleDelete = async (courseId: string, studentId: string) => {
-    //const accessToken = localStorage.getItem('token')
+    const accessToken = Cookies.get("token");
 
     try {
       const response = await fetch(`http://localhost:8000/user/enrollment`, {
         method: "DELETE",
         headers: {
-          // Authorization: `bearer ${accessToken}`,
+          Authorization: `bearer ${accessToken}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ courseId, studentId }),
@@ -74,13 +75,13 @@ const Page: FC<pageProps> = () => {
   };
 
   const handleUpdate = async (name: string, email: string) => {
-    //const accessToken = localStorage.getItem('token')
+    const accessToken = Cookies.get("token");
 
     try {
       const response = await fetch(`http://localhost:8000/user/${user?.id}`, {
         method: "PATCH",
         headers: {
-          // Authorization: `bearer ${accessToken}`,
+          Authorization: `bearer ${accessToken}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ name, email }),
@@ -265,7 +266,7 @@ const Page: FC<pageProps> = () => {
             <button
               type="submit"
               className="rounded-md bg-primary-button px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={() => handleUpdate(name, email)}
+              onClick={() => handleUpdate(name!, email!)}
             >
               Save
             </button>

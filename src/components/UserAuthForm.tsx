@@ -1,20 +1,13 @@
 "use client";
 
 import * as React from "react";
-
-// import { cn } from "@/lib/utils";
-// import { Icons } from "./Icon";
-// import { Button } from "./ui/Button";
-// import { Input } from "./ui/input";
-// import { Label } from "./ui/label";
 import Link from "next/link";
 import Image from "next/image";
 import smallLogo from "../../public/small-logo.png";
-import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuthContext } from "@/contexts/authContext";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import Cookie from "js-cookie";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
   page: UserAuthFormPage;
@@ -29,9 +22,9 @@ export enum UserAuthFormPage {
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const page: UserAuthFormPage = props.page;
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const [usernameInput, setUsernameInput] = React.useState("");
-  const [nameInput, setNameInput] = React.useState("");
-  const [passwordInput, setPasswordInput] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
   const router = useRouter();
   const { login } = useAuthContext();
@@ -46,7 +39,28 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
     if (page === UserAuthFormPage.LogIn) {
       try {
-        await login(usernameInput, passwordInput);
+        // // const response = await axios.post("http://localhost:8000/user/login", {
+        // //   email,
+        // //   name,
+        // //   password,
+        // // });
+        // const headers = new Headers();
+        // headers.append("Content-Type", "application/json");
+        // headers.append("Accept", "application/json");
+
+        // const response = await fetch("http://localhost:8000/user/login", {
+        //   method: "POST",
+        //   mode: "cors",
+        //   redirect: "follow",
+        //   credentials: "include", // Don't forget to specify this if you need cookies
+        //   headers: headers,
+        //   body: JSON.stringify({
+        //     email,
+        //     password,
+        //   }),
+        // });
+        const data = await login(email, password);
+        console.log(data);
         router.push("/");
       } catch (err) {
         console.log(err);
@@ -55,9 +69,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
     if (page === UserAuthFormPage.Register) {
       const userInfo = {
-        email: usernameInput,
-        name: nameInput,
-        password: passwordInput,
+        email,
+        name,
+        password,
       };
 
       try {
@@ -68,6 +82,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           },
           body: JSON.stringify(userInfo),
         });
+
         if (response.status !== 201) {
           console.log("error");
         } else {
@@ -117,7 +132,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               <div className="mt-2">
                 <input
                   onChange={(e) => {
-                    setUsernameInput(e.target.value);
+                    setEmail(e.target.value);
                   }}
                   id="email"
                   type="email"
@@ -138,7 +153,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                   <div className="mt-2">
                     <input
                       onChange={(e) => {
-                        setNameInput(e.target.value);
+                        setName(e.target.value);
                       }}
                       id="name"
                       name="name"
@@ -162,7 +177,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 <div className="mt-2">
                   <input
                     onChange={(e) => {
-                      setPasswordInput(e.target.value);
+                      setPassword(e.target.value);
                     }}
                     id="password"
                     type="password"
