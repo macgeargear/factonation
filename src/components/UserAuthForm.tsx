@@ -13,7 +13,6 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
   page: UserAuthFormPage;
 }
 
-// เก็บไหนดี
 export enum UserAuthFormPage {
   LogIn,
   Register,
@@ -39,26 +38,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
     if (page === UserAuthFormPage.LogIn) {
       try {
-        // // const response = await axios.post("http://localhost:8000/user/login", {
-        // //   email,
-        // //   name,
-        // //   password,
-        // // });
-        // const headers = new Headers();
-        // headers.append("Content-Type", "application/json");
-        // headers.append("Accept", "application/json");
-
-        // const response = await fetch("http://localhost:8000/user/login", {
-        //   method: "POST",
-        //   mode: "cors",
-        //   redirect: "follow",
-        //   credentials: "include", // Don't forget to specify this if you need cookies
-        //   headers: headers,
-        //   body: JSON.stringify({
-        //     email,
-        //     password,
-        //   }),
-        // });
         const data = await login(email, password);
         console.log(data);
         router.push("/");

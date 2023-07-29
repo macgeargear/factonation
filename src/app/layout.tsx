@@ -1,9 +1,7 @@
-"use client";
 import "./globals.css";
 import { cn } from "../lib/utils";
 
 import { IBM_Plex_Sans_Thai } from "next/font/google";
-import Navbar from "@/components/Navbar";
 import { AuthProvider } from "@/contexts/authContext";
 
 const imb_plex_sans_thai = IBM_Plex_Sans_Thai({
@@ -21,11 +19,7 @@ export default function RootLayout({
   return (
     <AuthProvider>
       <html lang="en" className={cn(imb_plex_sans_thai.className)}>
-        <body className={cn("min-h-screen mx-auto")}>
-          {/* <Navbar /> */}
-          {children}
-        </body>
-        {/* </QueryClientProvider> */}
+        <body className={cn("min-h-screen mx-auto")}>{children}</body>
       </html>
     </AuthProvider>
   );

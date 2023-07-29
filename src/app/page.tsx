@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { FC } from "react";
 
@@ -13,22 +14,22 @@ import Footer from "@/components/homePage/Foooter";
 import { cn } from "@/lib/utils";
 
 import Navbar from "@/components/Navbar";
+import { useAuthContext } from "@/contexts/authContext";
 
 interface pageProps {}
 const page: FC<pageProps> = ({}) => {
-  //   const { isLoggedIn } = useAuthContext();
-  //   console.log(isLoggedIn, "eieifoobar");
+  const { isLoggedIn } = useAuthContext();
   return (
     <div>
       <Navbar />
-      <Herosection isLoggedIn={false} />
+      <Herosection isLoggedIn={isLoggedIn} />
 
       <Problemsection />
       <Benefitsection />
       <Reviewsection />
       <Pricesection />
       <Questionsection />
-      <Lastsection isLoggedIn={false} />
+      <Lastsection isLoggedIn={isLoggedIn} />
       <Footer />
     </div>
   );

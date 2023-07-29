@@ -1,6 +1,5 @@
 "use client";
 
-import axios from "axios";
 import React, { createContext, useContext, useState, useEffect } from "react";
 import Cookies from "js-cookie";
 
@@ -21,10 +20,7 @@ const _id = Cookies.get("id");
 const _isAuth = Cookies.get("isAuth");
 const _email = Cookies.get("email");
 
-console.log({ _token, _name, _isAuth, _email });
 export const AuthProvider = ({ children }: any): React.ReactNode => {
-  // const [token, setToken] = useState("");
-  // const [user, setUset] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(!!_token);
   const [email, setEmail] = useState<string>(_email || "");
   const [name, setName] = useState(_name || "");

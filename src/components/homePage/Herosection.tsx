@@ -105,6 +105,7 @@ const Herosection: FC<ILogin> = async ({ isLoggedIn }) => {
           <Image
             src={heroImage}
             alt="hero image"
+            priority={true}
             // style={{ height: 350, width: 455 }}
             className="flex items-center rounded-xl"
           />

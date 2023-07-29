@@ -5,6 +5,7 @@ import { CourseDto } from "@/types/dto";
 import { getCourses } from "@/lib/getCourse";
 
 import useSWR from "swr";
+import Cookies from "js-cookie";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -27,7 +28,7 @@ export function useCourses(): {
 
 const userFetcher = (url: string) =>
   fetch(url, {
-    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    headers: { Authorization: `Bearer ${Cookies.get("token")}` },
   }).then((res) => res.json());
 
 export function useUsersCourses(): {
