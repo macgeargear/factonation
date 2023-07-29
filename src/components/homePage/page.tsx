@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/Button";
 import Herosection from "./Herosection";
 import Problemsection from "./Problemsection";
 import Benefitsection from "./Benefitsection";
@@ -10,6 +9,7 @@ import { IBM_Plex_Sans_Thai } from "next/font/google";
 import { Building2 } from "lucide-react";
 import Footer from "./Foooter";
 import Lastsection from "./Lastsection";
+import { useAuthContext } from "@/contexts/authContext";
 
 const imb_plex_sans_thai = IBM_Plex_Sans_Thai({
   subsets: ["thai"],
@@ -17,15 +17,16 @@ const imb_plex_sans_thai = IBM_Plex_Sans_Thai({
 });
 
 function Homepage() {
+  const { isLoggedIn } = useAuthContext();
   return (
     <div className={imb_plex_sans_thai.className}>
-      <Herosection />
+      <Herosection isLoggedIn={isLoggedIn} />
       <Problemsection />
       <Benefitsection />
       <Reviewsection />
       <Pricesection />
       <Questionsection />
-      <Lastsection />
+      <Lastsection isLoggedIn={isLoggedIn} />
       <Footer />
     </div>
   );

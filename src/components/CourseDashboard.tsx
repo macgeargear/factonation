@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Button, buttonVariants } from "./ui/Button";
+import { Button, buttonVariants } from "./ui/button";
 import { Progress } from "./ui/progress";
 import Link from "next/link";
 import { cn } from "@/lib/utils";

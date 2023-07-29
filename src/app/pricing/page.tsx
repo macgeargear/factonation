@@ -1,11 +1,7 @@
 import Link from "next/link";
 
-import { cn } from "@/lib/utils";
-import { Icons } from "@/components/Icon";
-import { buttonVariants } from "@/components/ui/Button";
 import PriceCard from "./PriceCard";
 import { pricingPlans } from "./pricing_plans";
-import { pricingPlan } from "@/types";
 
 export const metadata = {
   title: "Pricing",

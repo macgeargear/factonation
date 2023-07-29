@@ -1,4 +1,6 @@
-import { Button } from "@/components/ui/Button";
+/* eslint-disable react-hooks/rules-of-hooks */
+"use client";
+import { FC } from "react";
 
 import { IBM_Plex_Sans_Thai } from "next/font/google";
 import Herosection from "@/components/homePage/Herosection";
@@ -11,22 +13,26 @@ import Lastsection from "@/components/homePage/Lastsection";
 import Footer from "@/components/homePage/Foooter";
 import { cn } from "@/lib/utils";
 
-const imb_plex_sans_thai = IBM_Plex_Sans_Thai({
-  subsets: ["thai"],
-  weight: ["100", "200", "400", "600"],
-});
+import Navbar from "@/components/Navbar";
+import { useAuthContext } from "@/contexts/authContext";
 
-export default function Home() {
+interface pageProps {}
+const page: FC<pageProps> = ({}) => {
+  const { isLoggedIn } = useAuthContext();
   return (
-    <div className={cn(imb_plex_sans_thai.className)}>
-      <Herosection />
+    <div>
+      <Navbar />
+      <Herosection isLoggedIn={isLoggedIn} />
+
       <Problemsection />
       <Benefitsection />
       <Reviewsection />
       <Pricesection />
       <Questionsection />
-      <Lastsection />
+      <Lastsection isLoggedIn={isLoggedIn} />
       <Footer />
     </div>
   );
-}
+};
+
+export default page;

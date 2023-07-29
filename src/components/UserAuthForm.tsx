@@ -1,42 +1,32 @@
 "use client";
 
 import * as React from "react";
-
-// import { cn } from "@/lib/utils";
-// import { Icons } from "./Icon";
-// import { Button } from "./ui/Button";
-// import { Input } from "./ui/input";
-// import { Label } from "./ui/label";
 import Link from "next/link";
-import Image from "next/image"
-import smallLogo from '../../public/small-logo.png'
-import * as z from "zod";
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import Image from "next/image";
+import smallLogo from "../../public/small-logo.png";
 import { useAuthContext } from "@/contexts/authContext";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import Cookie from "js-cookie";
 
-
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> 
-{
-  page: UserAuthFormPage
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
+  page: UserAuthFormPage;
 }
 
-// เก็บไหนดี
 export enum UserAuthFormPage {
   LogIn,
-  Register
+  Register,
 }
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
-  const page: UserAuthFormPage = props.page
+  const page: UserAuthFormPage = props.page;
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const [usernameInput, setUsernameInput] = React.useState("");
-  const [nameInput, setNameInput] = React.useState("");
-  const [passwordInput, setPasswordInput] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
-  const router = useRouter()
-  const { login } = useAuthContext()
+  const router = useRouter();
+  const { login } = useAuthContext();
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
@@ -48,97 +38,126 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
     if (page === UserAuthFormPage.LogIn) {
       try {
-        await login(usernameInput, passwordInput) 
-        router.push('/') 
+        const data = await login(email, password);
+        console.log(data);
+        router.push("/");
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     }
 
     if (page === UserAuthFormPage.Register) {
-      const userInfo = { email:usernameInput, name:nameInput, password:passwordInput }
+      const userInfo = {
+        email,
+        name,
+        password,
+      };
 
       try {
         const response = await fetch(`http://localhost:8000/user/register`, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(userInfo),
-        })
-        console.log('hello foo')
+        });
+
         if (response.status !== 201) {
-          console.log('error')
+          console.log("error");
         } else {
-          router.push('/sign-in') 
+          router.push("/login");
         }
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     }
   }
 
   return (
-   
     <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
       <div className="mx-auto w-full max-w-sm lg:w-96">
         <div>
-        <Image
-                className="h-10 w-auto"
-                src={smallLogo}
-                alt="Factonation logo"
-              />
+          <Image
+            className="h-10 w-auto"
+            src={smallLogo}
+            alt="Factonation logo"
+          />
           <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            { page === UserAuthFormPage.LogIn ? 'เข้าสู่ระบบ' : 'สมัครสมาชิก' }
+            {page === UserAuthFormPage.LogIn ? "เข้าสู่ระบบ" : "สมัครสมาชิก"}
           </h2>
-          { page === UserAuthFormPage.LogIn ? ( <p className="mt-2 text-sm leading-6 text-gray-500">
-            ยังไม่ได้เป็นสมาชิก?{' '}
-            <Link href="/register" className="font-semibold text-primary-button hover:text-accent">
-              สมัครทันที
-            </Link>
-          </p> ) : ( <></>) }
+          {page === UserAuthFormPage.LogIn ? (
+            <p className="mt-2 text-sm leading-6 text-gray-500">
+              ยังไม่ได้เป็นสมาชิก?{" "}
+              <Link
+                href="/register"
+                className="font-semibold text-primary-button hover:text-accent"
+              >
+                สมัครทันที
+              </Link>
+            </p>
+          ) : (
+            <></>
+          )}
         </div>
-      <form onSubmit={onSubmit} action="#" method="POST" >
-        <div className="mt-10">
+        <form onSubmit={onSubmit} action="#" method="POST">
+          <div className="mt-10">
             <div className="space-y-6">
-                <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                  อีเมลล์
-                </label>
-                <div className="mt-2">
-                  <input
-                    onChange={(e) => {setUsernameInput(e.target.value)}}
-                    id="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
-                  />
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                อีเมลล์
+              </label>
+              <div className="mt-2">
+                <input
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                  id="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+
+              {page === UserAuthFormPage.Register ? (
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    ชื่อ
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      onChange={(e) => {
+                        setName(e.target.value);
+                      }}
+                      id="name"
+                      name="name"
+                      type="name"
+                      required
+                      className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
                 </div>
-            
-              { page === UserAuthFormPage.Register ? ( 
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
-                  ชื่อ
-                </label>
-                <div className="mt-2">
-                  <input
-                   onChange={(e) => {setNameInput(e.target.value)}}
-                    id="name"
-                    name="name"
-                    type="name"
-                    required
-                    className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>) : ( <></>) }
+              ) : (
+                <></>
+              )}
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
                   รหัสผ่าน
                 </label>
                 <div className="mt-2">
                   <input
-                    onChange={(e) => {setPasswordInput(e.target.value)}}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
                     id="password"
                     type="password"
                     autoComplete="current-password"
@@ -156,13 +175,19 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                     type="checkbox"
                     className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                   />
-                  <label htmlFor="remember-me" className="ml-3 block text-sm leading-6 text-gray-700">
+                  <label
+                    htmlFor="remember-me"
+                    className="ml-3 block text-sm leading-6 text-gray-700"
+                  >
                     จดจำฉัน
                   </label>
                 </div>
 
                 <div className="text-sm leading-6">
-                  <a href="#" className="font-semibold primary-button  text-primary-button hover:text-accent">
+                  <a
+                    href="#"
+                    className="font-semibold primary-button  text-primary-button hover:text-accent"
+                  >
                     ลืมรหัสผ่าน?
                   </a>
                 </div>
@@ -173,15 +198,15 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-primary-button px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                    { page === UserAuthFormPage.LogIn ? 'เข้าสู่ระบบ' : 'สมัครสมาชิก' }
+                  {page === UserAuthFormPage.LogIn
+                    ? "เข้าสู่ระบบ"
+                    : "สมัครสมาชิก"}
                 </button>
               </div>
             </div>
           </div>
-      </form>
-        
+        </form>
       </div>
     </div>
-  
   );
 }
