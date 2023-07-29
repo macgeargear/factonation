@@ -13,8 +13,7 @@ import { cn } from "@/lib/utils";
 interface ILogin {
   isLoggedIn: boolean;
 }
-const Lastsection: FC<ILogin> = () => {
-  const { isLoggedIn } = useAuthContext();
+const Lastsection: FC<ILogin> = ({ isLoggedIn }) => {
   return (
     <div id="last-section" className="flex justify-center h-auto my-10 ">
       <div className="flex flex-col items-center gap-10 h-11/12 ">

@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { FormEvent, SetStateAction, useState } from "react";
-import { Label } from "./ui/label";
+import { Label } from "@/components/ui/label";
 import {
   Dialog,
   DialogContent,
@@ -11,10 +11,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import SelectInstructor from "./SelectInstructor";
 import { LessonDto } from "@/types/dto";
-import AddLessonForm from "./AddLessonForm";
 
 export default function AddCourseForm() {
   const [file, setFile] = useState<Blob>();

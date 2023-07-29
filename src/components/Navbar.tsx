@@ -23,7 +23,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { Button, buttonVariants } from "./ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 const Navbar: FC = () => {
   const [open, setOpen] = useState<boolean>(false);

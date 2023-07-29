@@ -13,9 +13,8 @@ interface ILogin {
   isLoggedIn: boolean;
 }
 
-const Herosection: FC<ILogin> = async () => {
+const Herosection: FC<ILogin> = async ({ isLoggedIn }) => {
   // const isLoggedIn = false;
-  const { isLoggedIn } = useAuthContext();
   return (
     // <div className="min-h-screen">
     <div

@@ -47,18 +47,13 @@ const AccordianComponent: FC<AccordianComponentProps> = ({
               <AccordionContent
                 key={l.id}
                 className={cn(
-                  "hover:bg-secondary-button rounded-lg ease-in-out duration-200",
-                  {
-                    "bg-complete": l.isLessonCompleted,
-                    "hover:bg-complete": l.isLessonCompleted,
-                  }
+                  "hover:bg-secondary-button rounded-lg ease-in-out duration-200"
                 )}
               >
                 <Link
                   href={`/dashboard/learn/course/${params.courseId}/video/${l.id}`}
                   className={cn(
-                    "text-accent flex items-center justify-between hover:cursor-pointer",
-                    { "text-[#fff]": l.isLessonCompleted }
+                    "text-accent flex items-center justify-between hover:cursor-pointer"
                   )}
                 >
                   <p>{l.title}</p>

@@ -1,8 +1,8 @@
 "use client";
 import { LessonDto } from "@/types/dto";
 import { Dispatch, FC, FormEvent, SetStateAction, useState } from "react";
-import { Label } from "./ui/label";
-import { Button } from "./ui/button";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
