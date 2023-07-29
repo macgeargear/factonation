@@ -3,8 +3,6 @@ import CourseStatus from "@/components/CourseStatus";
 import Navbar from "@/components/Navbar";
 import UserSummary from "@/components/UserSummary";
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Button, buttonVariants } from "@/components/ui/button";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Card,

@@ -2,7 +2,6 @@
 "use client";
 import AddCourseForm from "@/components/AddCourseForm";
 import AddLessonForm from "@/components/AddLessonForm";
-import { Button } from "@/components/ui/button";
 import { getCourses } from "@/lib/getCourse";
 import { CourseDto, LessonDto } from "@/types/dto";
 import Link from "next/link";

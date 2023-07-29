@@ -2,18 +2,12 @@
 
 import { FC, useState } from "react";
 
-import { Button, buttonVariants } from "@/components/ui/button";
-import Image from "next/image";
+import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import ScrollLink from "./ScrollLink";
 
 import { AlignJustify } from "lucide-react";
-import { BookMarked } from "lucide-react";
-import { Newspaper } from "lucide-react";
-import { BadgeHelp } from "lucide-react";
-import { DollarSign } from "lucide-react";
 import { X } from "lucide-react";
 import { useAuthContext } from "@/contexts/authContext";
 
