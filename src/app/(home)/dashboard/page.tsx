@@ -21,9 +21,27 @@ interface pageProps {}
 
 const courseFetch = getCourses();
 
+const fetchStatus = async (courseId: string, studentId: string) => {
+  try {
+    const res = await axios.post(`${host}/course/student/enrolled`, {
+      courseId,
+      studentId,
+    });
+    const status = await res.data.data;
+    return status;
+  } catch (err) {
+    console.error(err);
+  }
+};
 const page: FC<pageProps> = () => {
   // const { courses, isLoading, isError } = useCourses();
   const [courses, setCourses] = useState<CourseDto[]>();
+  const [courseStatus, setCourseStatus] = useState<{
+    all: number;
+    complete: number;
+    percentage: number;
+  }>();
+  const { email, name, isLoggedIn, id } = useAuthContext();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -45,9 +63,17 @@ const page: FC<pageProps> = () => {
     };
     fetchCourse();
   }, []);
+
+  if (!isLoggedIn)
+    return (
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <h1 className="my-auto text-center">You have to log in first!</h1>
+      </div>
+    );
+
   return (
     <main className=" mt-12">
-      <div className="max-w-8xl mx-auto bg-background p-6 h-fit min-h-screen lg:my-12 flex lg:flex-row flex-col">
+      <div className="max-w-8xl mx-auto bg-background p-6 h-fit min-h-screen lg:my-12 flex lg:flex-row flex-col-reverse lg:justify-between">
         <div>
           <h1 className="lg:text-4xl text-2xl font-semibold text-primary-button my-2 mx-8 lg:text-start text-center">
             My Dashboard
@@ -57,9 +83,9 @@ const page: FC<pageProps> = () => {
           </p>
           <div className="flex gap-4 flex-wrap m-8 border-secondary-button border-t-[1.4px] w-fit pt-6 lg:justify-start justify-center">
             {courses &&
-              courses.map((course: CourseDto, i: number) => {
-                // const courseStatus = await getCourseStatus(id!, course.id);
-                // const courseStatus = useCourseStatus(id!, course.id);
+              courses.map(async (course: CourseDto, i: number) => {
+                const res = useCourseStatus(id, course.id);
+                const status = res.status;
                 return (
                   <Link
                     href={`/dashboard/learn/course/${course.id}`}
@@ -101,7 +127,7 @@ const page: FC<pageProps> = () => {
                         {/* <CourseStatus courseId={course.id} studentId={id!} /> */}
                       </div>
                       <Progress
-                        value={20}
+                        value={status.percent}
                         className="h-1 max-w-xl bg-green-400"
                       />
                       <p className="self-end">
@@ -117,15 +143,13 @@ const page: FC<pageProps> = () => {
         <div className="rounded-xl p-6 bg-gray-100 flex flex-col gap-2 lg:w-1/3 w-full h-fit">
           <div className="flex flex-col items-center lg:my-8 my-4">
             <Avatar className="w-24 h-24">
-              <AvatarImage
-                className="rounded-full"
-                src="https://github.com/factonation.png"
-                alt="@shadcn"
-              />
-              <AvatarFallback className="bg-primary-button">F</AvatarFallback>
+              <AvatarImage className="rounded-full" src="" alt="" />
+              <AvatarFallback className="bg-primary-button text-white text-xl">
+                {email[0]}
+              </AvatarFallback>
             </Avatar>
-            <h1 className="text-2xl font-semibold">Cookie Brownie</h1>
-            <p>cookie@brownie.com</p>
+            <h1 className="text-2xl font-semibold">{name}</h1>
+            <p>{email}</p>
           </div>
           <div className="flex flex-col justify-start px-4 gap-4 ">
             <h1 className="text-lg font-medium lg:text-start text-center">
