@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
         password,
       });
       const adminData = resAdmin.data.data;
-      if (adminData.isAdmin) {
+      if (adminData.role === "Admin") {
         localStorage.setItem("token", adminData.token);
         localStorage.setItem("email", adminData.email);
         localStorage.setItem("name", adminData.name);
