@@ -38,41 +38,29 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
 
   const login = async (email: string, password: string) => {
     try {
-      const resAdmin = await axios.post(`${host}/user/isAdmin`, {
+      const res = await axios.post(`${host}/user/login`, {
         email,
         password,
       });
-      const adminData = resAdmin.data.data;
-      if (adminData.role === "Admin") {
-        localStorage.setItem("token", adminData.token);
-        localStorage.setItem("email", adminData.email);
-        localStorage.setItem("name", adminData.name);
-        localStorage.setItem("id", adminData.id);
-        setIsLoggedIn(true);
-        setEmail(adminData.email);
-        setId(adminData.id);
-        setName(adminData.name);
-        router.push("/admin/courses");
-      } else {
-        const res = await axios.post(`${host}/user/login`, {
-          email,
-          password,
-        });
 
-        if (res.status === 401) {
-          throw new Error(res.statusText);
-        }
-        const data = res.data.data;
-
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("email", data.email);
-        localStorage.setItem("name", data.name);
-        localStorage.setItem("id", data.id);
-        setIsLoggedIn(true);
-        setEmail(data.email);
-        setId(data.id);
-        setName(data.name);
+      if (res.status === 401) {
+        throw new Error(res.statusText);
       }
+      const data = res.data.data;
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("email", data.email);
+      localStorage.setItem("name", data.name);
+      localStorage.setItem("id", data.id);
+      setIsLoggedIn(true);
+      setEmail(data.email);
+      setId(data.id);
+      setName(data.name);
+      if (data.role === "Admin") {
+        router.push("/admin/courses");
+        return;
+      }
+      router.push("/");
     } catch (err: any) {
       throw new Error(err.message);
     }
@@ -99,6 +87,7 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
         throw new Error(res.statusText);
       }
       router.push("/");
+      location.reload();
       console.log(`logging out`);
     } catch (err) {
       console.error(err);

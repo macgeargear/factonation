@@ -48,7 +48,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     if (page === UserAuthFormPage.LogIn) {
       try {
         await login(usernameInput, passwordInput);
-        router.push("/");
       } catch (err) {
         console.log(err);
       }

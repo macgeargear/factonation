@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import { Button, buttonVariants } from "./ui/MainButton";
 import Image from "next/image";
@@ -19,7 +19,17 @@ import { useAuthContext } from "@/contexts/authContext";
 
 const NavbarAdmin: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const { isLoggedIn, name } = useAuthContext();
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+
+    if (storedToken) {
+      console.log(storedToken);
+      setToken(storedToken);
+    }
+  }, []);
+  const { isLoggedIn, name, logout } = useAuthContext();
 
   return (
     <div className="sticky top-0 z-[10]">
@@ -48,15 +58,13 @@ const NavbarAdmin: FC = () => {
                   <AvatarImage></AvatarImage>
                   <AvatarFallback>{name![0]}</AvatarFallback>
                 </Avatar>
-                <Link
-                  href={"/"}
-                  className={cn(
-                    buttonVariants({ variant: "ghost" }),
-                    "bg-secondary-button text-[#222]"
-                  )}
+                <Button
+                  variant="ghost"
+                  onClick={() => logout(token)}
+                  className="bg-secondary-button text-[#222]"
                 >
                   Log out
-                </Link>
+                </Button>
               </>
             ) : (
               <>
