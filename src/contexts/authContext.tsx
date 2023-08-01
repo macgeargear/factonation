@@ -38,8 +38,15 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
 
   const login = async (email: string, password: string) => {
     try {
-      if (email === "chayn@avocado.com" && password === "chayn_loves_avocado") {
-        router.push("/admin/course");
+      const resAdmin = await axios.post(`${host}/user/isAdmin`, {
+        email,
+        password,
+      });
+      console.log(resAdmin.data);
+      const isAdmin = resAdmin.data.data.isAdmin;
+      if (isAdmin) {
+        router.push("/admin/courses");
+        return;
       }
       const res = await axios.post(`${host}/user/login`, {
         email,
