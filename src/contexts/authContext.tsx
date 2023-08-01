@@ -98,7 +98,7 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
       if (res.status > 400) {
         throw new Error(res.statusText);
       }
-      location.reload();
+      router.push("/");
       console.log(`logging out`);
     } catch (err) {
       console.error(err);
