@@ -71,15 +71,17 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
       // setToken("");
       setName("");
       setId("");
-      localStorage.removeItem("user");
+      localStorage.removeItem("name");
+      localStorage.removeItem("email");
+      localStorage.removeItem("id");
       setIsLoggedIn(false);
       setEmail("");
 
       if (res.status > 400) {
         throw new Error(res.statusText);
       }
+      location.reload();
       console.log(`logging out`);
-      router.push("/");
     } catch (err) {
       console.error(err);
     }
