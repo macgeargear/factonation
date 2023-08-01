@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
       // setToken("");
       setName("");
       setId("");
-      localStorage.removeItem("user");
+      localStorage.removeItem("name");
       setIsLoggedIn(false);
       setEmail("");
 

@@ -54,6 +54,10 @@ const Navbar: FC = () => {
         throw new Error(res.statusText);
       }
       console.log(`logging out`);
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      localStorage.removeItem("email");
+      localStorage.removeItem("id");
       router.push("/");
     } catch (err) {
       console.error(err);
