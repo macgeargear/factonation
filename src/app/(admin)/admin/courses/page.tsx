@@ -22,14 +22,6 @@ const page: FC<pageProps> = () => {
 
     fetchCourse();
   }, []);
-  // const courses = [
-  //   {
-  //     name: "C# & .NET Fundamentals",
-  //     id: "550e8400-e29b-41d4-a716-446655440000",
-  //     instructor: "Chayn",
-  //   },
-  //   // More people...
-  // ];
 
   return (
     <div>
@@ -44,13 +36,6 @@ const page: FC<pageProps> = () => {
             </p>
           </div>
           <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-            {/* <button
-              type="button"
-              className="block rounded-md bg-primary-button px-3 py-2 text-center text-sm font-semibold text-white hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Add user
-            </button> */}
-
             <AddCourseForm />
           </div>
         </div>

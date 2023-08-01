@@ -10,7 +10,7 @@ import Link from "next/link";
 import { buttonVariants } from "../ui/MainButton";
 import { createCheckoutSession } from "@/lib/payment";
 import { useRouter } from "next/navigation";
-import { host } from "@/types";
+import { container, host, item } from "@/types";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -107,16 +107,6 @@ const Pricesection: FC = () => {
     router.push(url);
   };
 
-  // const checkoutProduct = async (priceId: string, id: string) => {
-  //   const response = await fetch(`${host}/webhook/create`, {
-  //     method: "POST",
-  //     headers: {
-  //       Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}`,
-  //     },
-  //     body: JSON.stringify({ priceId, id }),
-  //   });
-  // };
-
   return (
     <div className="lg:my-28 my-5" id="price-section">
       <div className="flex flex-col gap-3 w-full mx-auto my-14 ">
@@ -141,26 +131,25 @@ const Pricesection: FC = () => {
           </p>
         </motion.div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: "some" }}
-          transition={{
-            duration: 0.3,
-            type: "spring",
-            stiffness: 260,
-            damping: 20,
-          }}
-          variants={{
-            hidden: { opacity: 0, x: 150 },
-            visible: { opacity: 1, x: 0 },
-          }}
-          className="flex items-center justify-center gap-3 "
-        >
-          <div className="flex lg:flex-row lg:flex-nowrap flex-col flex-wrap gap-3 items-center ">
+        <div className="flex items-center justify-center gap-3 ">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: "some" }}
+            transition={{
+              delay: 0.2,
+              duration: 0.3,
+              type: "spring",
+              stiffness: 260,
+              damping: 20,
+            }}
+            variants={container}
+            className="flex lg:flex-row lg:flex-nowrap flex-col flex-wrap gap-3 items-center "
+          >
             {priceDetails.map((priceDetail, i) => {
               return (
-                <div
+                <motion.div
+                  variants={item}
                   className={cn(
                     "border border-stone-200 lg:p-6 rounded-xl lg:w-60 lg:gap-0 w-11/12 flex flex-col justify-between backdrop-blur-3xl lg:h-[530px] h-auto sm:p-7 p-3 gap-7  ",
                     {
@@ -224,11 +213,11 @@ const Pricesection: FC = () => {
                       Read More
                     </Link>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );

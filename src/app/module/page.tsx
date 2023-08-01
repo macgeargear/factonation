@@ -18,11 +18,10 @@ const page: FC<pageProps> = async () => {
   return (
     <div className="imb_plex_sans_thai">
       {/* <ModuleCard /> */}
-      <div className="flex justify-center my-10">
-        <div className="flex flex-col gap-10 w-9/12 ">
-          <div className="flex gap-2">
-            <p className="text-3xl font-black">|</p>
-            <p className="text-4xl font-bold">แนะนำคอร์สเรียน</p>
+      <div className="flex items-center justify-center my-10">
+        <div className="flex flex-col gap-10 items-center ">
+          <div className="flex gap-2 w-auto">
+            <p className="lg:text-4xl text-2xl font-bold">แนะนำคอร์สเรียน</p>
           </div>
 
           {courses.map((course, i) => {

@@ -7,7 +7,14 @@ import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import ScrollLink from "./ScrollLink";
 
-import { AlignJustify } from "lucide-react";
+import {
+  AlignJustify,
+  LogIn,
+  LogOut,
+  MailPlus,
+  Store,
+  UserPlus,
+} from "lucide-react";
 import { BookMarked } from "lucide-react";
 import { Newspaper } from "lucide-react";
 import { BadgeHelp } from "lucide-react";
@@ -25,6 +32,7 @@ import {
 import { Button, buttonVariants } from "./ui/MainButton";
 import { host } from "@/types";
 import { useRouter } from "next/navigation";
+import { badgeVariants } from "./ui/Badge";
 
 const Navbar: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -46,25 +54,30 @@ const Navbar: FC = () => {
     <div className="sticky top-0 z-[10]">
       <div className="sticky top-0 inset-x-0 h-fit z-[10] py-4 bg-[#0B0E0C] text-background backdrop-blur-lg  ">
         <div className="container h-full mx-auto flex items-center justify-between gap-2">
-          <div className="flex justify-start gap-12 items-center">
+          <div className="flex justify-between gap-6 items-center">
             <Link href="/">
               <h1 className=" font-bold text-white text-2xl md:block">
                 Factonation
               </h1>
             </Link>
-
-            <div className="hidden md:flex md:items-center md:justify-start md:gap-8">
-              <Link href="/dashboard">คอร์สเรียน</Link>
-
-              <Link href="/#price-section" className="scroll-smooth">
-                ราคาคอร์ส
+            <div className="lg:flex lg:gap-3 lg:items-cente hidden ">
+              <Link href="/module">
+                <p>คอร์สเรียน</p>
               </Link>
-              <Link href="/store">บทความ</Link>
-              <ScrollLink href="/#question-section">คำถามที่พบบ่อย</ScrollLink>
+              <Link href="https://www.lazada.co.th/shop/factonation/">
+                <p>ร้านค้า</p>
+              </Link>
+              <Link href="https://page.line.me/559odtho?openQrModal=true">
+                <p>ติดต่อเรา</p>
+              </Link>
             </div>
           </div>
 
           <div className="lg:flex items-center gap-3 hidden ">
+            {/* <div className="hidden lg:flex lg:items-center lg:justify-start lg:gap-10">
+            
+            <Link href="/dashboard">คอร์สเรียน</Link>
+          </div> */}
             {isLoggedIn ? (
               <DropdownMenu>
                 <DropdownMenuTrigger>
@@ -75,20 +88,14 @@ const Navbar: FC = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="bg-white" align="end">
                   {/* Name & Email */}
-                  <div className="flex items-center">
-                    <Avatar className=" bg-primary-button">
-                      <AvatarImage></AvatarImage>
-                      <AvatarFallback>{email![0]}</AvatarFallback>
-                    </Avatar>
-                    <div className="flex items-center justify-start gap-2 p-2">
-                      <div className="flex flex-col space-y-1 leading-none">
-                        {isLoggedIn && (
-                          <>
-                            <p className="font-xl font-semibold">{email}</p>
-                            <p className="font-lg">{name}</p>
-                          </>
-                        )}
-                      </div>
+                  <div className="flex items-center justify-start gap-2 p-2">
+                    <div className="flex flex-col space-y-1 leading-none">
+                      {isLoggedIn && (
+                        <>
+                          <p className="font-xl font-semibold">{email}</p>
+                          <p className="font-lg">{name}</p>
+                        </>
+                      )}
                     </div>
                   </div>
                   <DropdownMenuSeparator className="bg-slate-200 px-4" />
@@ -98,20 +105,21 @@ const Navbar: FC = () => {
                   <DropdownMenuSeparator className="bg-slate-200 px-4" />
 
                   <DropdownMenuItem className="cursor-pointer">
-                    <Button variant={"ghost"} onClick={() => logout(token)}>
-                      Sign out
-                    </Button>
+                    Sign out
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
               <>
-                <Link className={cn(buttonVariants())} href="/login">
+                <Link
+                  className={cn(buttonVariants({ variant: "ghost" }))}
+                  href="/login"
+                >
                   เข้าสู่ระบบ
                 </Link>
                 <Link
                   className={cn(
-                    buttonVariants(),
+                    buttonVariants({ variant: "ghost" }),
                     "bg-secondary-button text-[#222]"
                   )}
                   href="/register"
@@ -142,7 +150,7 @@ const Navbar: FC = () => {
       <div
         className={`${
           open
-            ? "lg:hidden flex left-0 fixed h-full w-2/4 sm:w-2/5  z-10 "
+            ? "lg:hidden flex right-0 fixed h-full w-2/4 sm:w-2/5  z-10 "
             : "hidden"
         }`}
       >
@@ -151,35 +159,46 @@ const Navbar: FC = () => {
             open ? "translate-x-100" : "-translate-x-0"
           } `}
         >
-          <div className="flex flex-col gap-4 mx-7 py-6">
-            <div
-              className="flex gap-2 items-center"
-              onClick={() => setOpen(!open)}
-            >
+          <div
+            className="flex flex-col gap-4 mx-7 py-6"
+            onClick={() => setOpen(!open)}
+          >
+            <div className="flex gap-2 items-center">
               <BookMarked size={15} />
-              <Link href="/course">คอร์สเรียน</Link>
+              <Link href="/dashboard">คอร์สเรียน</Link>
             </div>
-            <div
-              className="flex gap-2 items-center"
-              onClick={() => setOpen(!open)}
-            >
-              <DollarSign size={15} />
-              <Link href="/#price-section">ราคาคอร์ส</Link>
+            <div className="flex gap-2 items-center">
+              <Store size={15} />
+              <Link href="https://www.lazada.co.th/shop/factonation/">
+                ร้านค้า
+              </Link>
             </div>
-            <div
-              className="flex gap-2 items-center"
-              onClick={() => setOpen(!open)}
-            >
-              <Newspaper size={15} />
-              <p>บทความ</p>
+            <div className="flex gap-2 items-center">
+              <MailPlus size={15} />
+              <Link href="https://page.line.me/559odtho?openQrModal=true">
+                ติดต่อเรา
+              </Link>
             </div>
-            <div
-              className="flex gap-2 items-center"
-              onClick={() => setOpen(!open)}
-            >
-              <BadgeHelp size={15} />
-              <Link href="/#question-section">คำถามที่พบบ่อย</Link>
-            </div>
+
+            {isLoggedIn ? (
+              <>
+                <div className="flex gap-2 items-center">
+                  <LogOut size={15} />
+                  <Link href="/login">logout</Link>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="flex gap-2 items-center">
+                  <LogIn size={15} />
+                  <Link href="/login">เข้าสู่ระบบ</Link>
+                </div>
+                <div className="flex gap-2 items-center">
+                  <UserPlus size={15} />
+                  <Link href="/register">ลงทะเบียน</Link>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

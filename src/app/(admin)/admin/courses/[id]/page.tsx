@@ -1,15 +1,19 @@
 "use client";
 
 //import { getCourse } from "@/lib/getCourse";
+
+interface pageProps {
+  params: {
+    courseId: string;
+  };
+}
 import * as React from "react";
-import { FC } from "react";
-import { ScrollArea } from "@/components/ui/ScrollArea";
-import { Separator } from "@/components/ui/Separator";
-import { PhotoIcon } from "@heroicons/react/24/solid";
 import CourseForm, {
   AdminCoursePage,
 } from "@/components/adminCoursePage/CourseForm";
-import { getCourse } from "@/lib/getCourse";
+import { useState, useEffect } from "react";
+import Lottie from "lottie-react";
+import Loading from "@/components/homePage/Loading.json";
 
 interface pageProps {
   params: {
@@ -17,12 +21,28 @@ interface pageProps {
   };
 }
 
-const page = ({ params: { courseId } }: pageProps) => {
+const Page = ({ params: { courseId } }: pageProps) => {
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
   return (
     <>
-      <CourseForm page={AdminCoursePage.Edit} />
+      {loading ? (
+        <div className="flex justify-center items-center ">
+          <div className=" mx-auto my-24 w-auto h-auto">
+            <Lottie loop={true} animationData={Loading} size={200} />
+          </div>
+        </div>
+      ) : (
+        <CourseForm page={AdminCoursePage.Edit} />
+      )}
     </>
   );
 };
-
-export default page;
+export default Page;

@@ -47,17 +47,17 @@ const page: FC<pageProps> = () => {
   }, []);
   return (
     <main className=" mt-12">
-      <div className="max-w-8xl mx-auto bg-background p-6 h-fit min-h-screen my-12 flex justify-between">
+      <div className="max-w-8xl mx-auto bg-background p-6 h-fit min-h-screen lg:my-12 flex lg:flex-row flex-col">
         <div>
-          <h1 className="text-4xl font-semibold text-primary-button my-2 mx-8">
+          <h1 className="lg:text-4xl text-2xl font-semibold text-primary-button my-2 mx-8 lg:text-start text-center">
             My Dashboard
           </h1>
-          <p className="text-[#222] mx-8">
+          <p className="text-[#222] mx-8 lg:justify-start justify-center lg:text-start text-center">
             Way to go! Here are all the courses you&apos;ve finished.
           </p>
-          <div className="flex gap-4 flex-wrap m-8 border-secondary-button border-t-[1.4px] w-fit pt-6">
-            {courses &&
-              courses.map((course: CourseDto, i: number) => {
+          <div className="flex gap-4 flex-wrap m-8 border-secondary-button border-t-[1.4px] w-fit pt-6 lg:justify-start justify-center">
+            {courses.data &&
+              courses.data.map((course: CourseDto, i: number) => {
                 // const courseStatus = await getCourseStatus(id!, course.id);
                 // const courseStatus = useCourseStatus(id!, course.id);
                 return (
@@ -114,8 +114,8 @@ const page: FC<pageProps> = () => {
               })}
           </div>
         </div>
-        <div className="rounded-xl p-6 bg-gray-100 flex flex-col gap-2 w-1/3 h-fit">
-          <div className="flex flex-col items-center my-8">
+        <div className="rounded-xl p-6 bg-gray-100 flex flex-col gap-2 lg:w-1/3 w-full h-fit">
+          <div className="flex flex-col items-center lg:my-8 my-4">
             <Avatar className="w-24 h-24">
               <AvatarImage
                 className="rounded-full"
@@ -128,7 +128,9 @@ const page: FC<pageProps> = () => {
             <p>cookie@brownie.com</p>
           </div>
           <div className="flex flex-col justify-start px-4 gap-4 ">
-            <h1 className="text-lg font-medium">course summary</h1>
+            <h1 className="text-lg font-medium lg:text-start text-center">
+              course summary
+            </h1>
             <div className="flex items-center justify-between rounded-xl bg-background px-8 py-6 gap-4 shadow-sm">
               <div className="flex items-center gap-4">
                 <PresentationIcon />

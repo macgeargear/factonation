@@ -49,28 +49,32 @@ interface ModuleCardProps {
 
 const ModuleCard: FC<ModuleCardProps> = ({ course }) => {
   return (
-    <div className="flex flex-col gap-6 mx-auto">
-      <div className="flex gap-5 rounded-xl w-[920px] h-[340px] bg-neutral-100 px-6 items-center drop-shadow-md ">
-        <div className="maw-w-[460px] max-h-[280px] grid place-content-center overflow-hidden">
+    <div className="flex flex-col items-center gap-6 ">
+      <div className="flex lg:flex-row flex-col gap-5 rounded-xl lg:w-[920px] lg:h-[340px] w-[320px] bg-neutral-100 px-6 items-center drop-shadow-md mx-auto lg:py-0 py-6  ">
+        <div className="maw-w-[460px] max-h-[280px] grid place-content-center ">
           <Image
             src={course.imageUrl}
             alt="Industry image"
+            width={480}
+            height={280}
             className=""
-            width={1080}
-            height={1920}
           />
         </div>
-        <div className="flex flex-col w-[710px] h-[320px] p-2 gap-3 justify-center">
+        <div className="flex flex-col lg:w-[710px] lg:h-[320px] w-[280px] p-2 gap-3 justify-center">
           <div className="flex flex-col gap-2">
             <p className="text-xs text-primary-button">{course.courseName}</p>
             <p className="text-xl font-semibold">{course.courseName}</p>
-            <p className="text-sm text-stone-600">{course.details}</p>
+            <p className="text-sm text-stone-600 lg:w-[460px] w-[280px] mx-auto">
+              {course.details}
+            </p>
             <p className="text-xs font-semibold">
               จำนวนวิดีโอ {course.lessons.length} วิดีโอ
             </p>
           </div>
           <div className="flex gap-10 justify-between border-t border-primary-button py-1 ">
-            <p className="text-xs font-semibold my-2  bg-neutral-100">{4000}</p>
+            <p className="text-xs font-semibold my-2  bg-neutral-100">
+              {course.price}
+            </p>
             <div className="flex items-center gap-0">
               <Link
                 href={`/dashboard/courseOverview/${course.id}`}

@@ -13,6 +13,7 @@ export interface CourseDto {
   isCompleted: boolean;
   lessons: LessonDto[];
   enrollment: EnrollmentDto[];
+  price: number;
 }
 
 export interface CourseWithLessonDto extends CourseDto {
