@@ -83,9 +83,7 @@ const page: FC<pageProps> = () => {
           </p>
           <div className="flex gap-4 flex-wrap m-8 border-secondary-button border-t-[1.4px] w-fit pt-6 lg:justify-start justify-center">
             {courses &&
-              courses.map(async (course: CourseDto, i: number) => {
-                const res = useCourseStatus(id, course.id);
-                const status = res.status;
+              courses.map((course: CourseDto, i: number) => {
                 return (
                   <Link
                     href={`/dashboard/learn/course/${course.id}`}
@@ -161,7 +159,7 @@ const page: FC<pageProps> = () => {
                 <p className="text-md">Course Completed</p>
               </div>
               <p className="align-self-end px-4 py-2 bg-secondary-button rounded-xl">
-                3
+                0
               </p>
             </div>
             <div className="flex items-center justify-between rounded-xl bg-background px-8 py-6 gap-4 shadow-sm">
@@ -170,7 +168,7 @@ const page: FC<pageProps> = () => {
                 <p className="text-md">Lessons Completed</p>
               </div>
               <p className="align-self-end px-4 py-2 bg-secondary-button rounded-xl">
-                3
+                0
               </p>
             </div>
           </div>
