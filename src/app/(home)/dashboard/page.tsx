@@ -56,8 +56,8 @@ const page: FC<pageProps> = () => {
             Way to go! Here are all the courses you&apos;ve finished.
           </p>
           <div className="flex gap-4 flex-wrap m-8 border-secondary-button border-t-[1.4px] w-fit pt-6 lg:justify-start justify-center">
-            {courses &&
-              courses.map((course: CourseDto, i: number) => {
+            {courses.data &&
+              courses.data.map((course: CourseDto, i: number) => {
                 // const courseStatus = await getCourseStatus(id!, course.id);
                 // const courseStatus = useCourseStatus(id!, course.id);
                 return (
