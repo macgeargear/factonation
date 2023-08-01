@@ -105,7 +105,9 @@ const Navbar: FC = () => {
                   <DropdownMenuSeparator className="bg-slate-200 px-4" />
 
                   <DropdownMenuItem className="cursor-pointer">
-                    Sign out
+                    <Button variant={"ghost"} onClick={() => logout(token)}>
+                      Sign out
+                    </Button>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -184,7 +186,9 @@ const Navbar: FC = () => {
               <>
                 <div className="flex gap-2 items-center">
                   <LogOut size={15} />
-                  <Link href="/login">logout</Link>
+                  <Button variant="ghost" onClick={() => logout(token)}>
+                    logout
+                  </Button>
                 </div>
               </>
             ) : (
