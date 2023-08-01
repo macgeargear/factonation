@@ -125,7 +125,7 @@ const page: FC<pageProps> = () => {
                         {/* <CourseStatus courseId={course.id} studentId={id!} /> */}
                       </div>
                       <Progress
-                        value={status.percent}
+                        value={0}
                         className="h-1 max-w-xl bg-green-400"
                       />
                       <p className="self-end">
