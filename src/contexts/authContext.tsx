@@ -2,7 +2,6 @@
 
 import { host } from "@/types";
 import axios from "axios";
-import router from "next/router";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 export interface IAuthContext {
