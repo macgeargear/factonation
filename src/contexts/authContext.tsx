@@ -42,9 +42,16 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
         email,
         password,
       });
-      const isAdmin = resAdmin.data.data.isAdmin;
-      console.log(resAdmin.data, resAdmin.data.isAdmin);
-      if (isAdmin) {
+      const adminData = resAdmin.data.data;
+      if (adminData.isAdmin) {
+        localStorage.setItem("token", adminData.token);
+        localStorage.setItem("email", adminData.email);
+        localStorage.setItem("name", adminData.name);
+        localStorage.setItem("id", adminData.id);
+        setIsLoggedIn(true);
+        setEmail(adminData.email);
+        setId(adminData.id);
+        setName(adminData.name);
         router.push("/admin/courses");
       } else {
         const res = await axios.post(`${host}/user/login`, {
