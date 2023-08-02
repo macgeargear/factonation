@@ -99,7 +99,7 @@ const page: FC<pageProps> = () => {
                         height={160}
                         className="object-cover object-center"
                       />
-                      {/* <div className="h-[160px] w-[350px] bg-primary-button"></div>{" "} */}
+                      {/* <div className="h-[160px] percentw-[350px] bg-primary-button"></div>{" "} */}
                       <div className="px-4 py-2">
                         <h1 className="text-lg">{course.courseName}</h1>
                         <div className="flex gap-4 items-center text-md">

@@ -87,7 +87,6 @@ export const AuthProvider = ({ children }: any): React.ReactNode => {
         throw new Error(res.statusText);
       }
       router.push("/");
-      location.reload();
       console.log(`logging out`);
     } catch (err) {
       console.error(err);
